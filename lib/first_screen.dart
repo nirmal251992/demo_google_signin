@@ -11,10 +11,7 @@ class FirstScreen extends StatefulWidget {
 }
 
 class _FirstScreenState extends State<FirstScreen> {
-
-
   AdmobReward reward;
-
   @override
   void initState() {
     super.initState();
@@ -53,7 +50,6 @@ class _FirstScreenState extends State<FirstScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             // mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-
               RaisedButton(
                 onPressed: () async {
                   if (await reward.isLoaded) {
@@ -70,30 +66,18 @@ class _FirstScreenState extends State<FirstScreen> {
               //   backgroundColor: Colors.transparent,
               // ),
               SizedBox(height: 40),
+
               Text(
-                'NAME',
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54),
-              ),
-              Text(
-                name,
+               'Name : $name',
                 style: TextStyle(
                   fontSize: 25,
                   color: Colors.greenAccent,
                 ),
               ),
               SizedBox(height: 20),
+
               Text(
-                'EMAIL',
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54),
-              ),
-              Text(
-                email,
+                'Email : $email',
                 style: TextStyle(
                   fontSize: 25,
                   color: Colors.greenAccent,
@@ -134,7 +118,6 @@ class _FirstScreenState extends State<FirstScreen> {
               ),
             ],
           ),
-
         ),
       ),
     );
