@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'sign_in.dart';
 import 'first_screen.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -11,6 +13,7 @@ class _LoginPageState extends State<LoginPage> {
 
   final FirebaseMessaging _messaging = FirebaseMessaging();
 @override
+
 void initState() {
   super.initState();
   _messaging.getToken().then((token) {
