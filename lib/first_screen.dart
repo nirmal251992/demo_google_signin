@@ -4,7 +4,6 @@ import 'sign_in.dart';
 import 'package:admob_flutter/admob_flutter.dart';
 import 'ad_manager.dart';
 
-
 class FirstScreen extends StatefulWidget {
   @override
   _FirstScreenState createState() => _FirstScreenState();
@@ -12,6 +11,7 @@ class FirstScreen extends StatefulWidget {
 
 class _FirstScreenState extends State<FirstScreen> {
   AdmobReward reward;
+
   @override
   void initState() {
     super.initState();
@@ -24,12 +24,30 @@ class _FirstScreenState extends State<FirstScreen> {
             print("User rewarded.......");
           }
         });
-    reward.load();
+       reward.load();
+
+    Future.delayed(Duration(seconds: 5), () async {
+      if (await reward.isLoaded) {
+        reward.show();
+        }
+      });
+
+      // _showadd();
   }
 
+void show() async {
+    setState(() {
+      reward.show();
+    });
+}
+  // _showadd() async {
+  //     if (await reward.isLoaded) {
+  //       reward.show();
+  //     }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Google SignIn Demo'),
@@ -50,14 +68,14 @@ class _FirstScreenState extends State<FirstScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             // mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              RaisedButton(
-                onPressed: () async {
-                  if (await reward.isLoaded) {
-                    reward.show();
-                  }
-                },
-                child: Text("Reward Ad"),
-              ),
+              // RaisedButton(
+              //   onPressed: () async {
+              //     if (await reward.isLoaded) {
+              //       reward.show();
+              //     }
+              //   },
+              //   child: Text("Show Video Ad"),
+              // ),
               // CircleAvatar(
               //   backgroundImage: NetworkImage(
               //     imageUrl,
