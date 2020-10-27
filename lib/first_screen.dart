@@ -22,10 +22,8 @@ class _FirstScreenState extends State<FirstScreen> {
     //     reward.show();
     //     }
     //   });
-
       // _showadd();
   }
-
 // void show() async {
 //     setState(() {
 //       reward.show();
