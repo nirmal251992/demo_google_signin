@@ -5,41 +5,32 @@ import 'package:admob_flutter/admob_flutter.dart';
 import 'ad_manager.dart';
 
 class FirstScreen extends StatefulWidget {
+  AdmobReward rew;
+  FirstScreen ({ Key key, this.rew }): super(key: key);
   @override
   _FirstScreenState createState() => _FirstScreenState();
 }
-
 class _FirstScreenState extends State<FirstScreen> {
-  AdmobReward reward;
 
   @override
   void initState() {
     super.initState();
-    reward = AdmobReward(adUnitId: AdManager.rewardId);
-    reward.load();
-    reward = AdmobReward(
-        adUnitId: AdManager.rewardId,
-        listener: (event, args) {
-          if (event == AdmobAdEvent.rewarded) {
-            print("User rewarded.......");
-          }
-        });
-       reward.load();
+    widget.rew.show();
 
-    Future.delayed(Duration(seconds: 5), () async {
-      if (await reward.isLoaded) {
-        reward.show();
-        }
-      });
+    // Future.delayed(Duration(seconds: 5), () async {
+    //   if (await reward.isLoaded) {
+    //     reward.show();
+    //     }
+    //   });
 
       // _showadd();
   }
 
-void show() async {
-    setState(() {
-      reward.show();
-    });
-}
+// void show() async {
+//     setState(() {
+//       reward.show();
+//     });
+
   // _showadd() async {
   //     if (await reward.isLoaded) {
   //       reward.show();

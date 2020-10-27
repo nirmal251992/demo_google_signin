@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'sign_in.dart';
 import 'first_screen.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-
+import 'package:admob_flutter/admob_flutter.dart';
+import 'ad_manager.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -10,12 +11,23 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
+  AdmobReward reward;
   final FirebaseMessaging _messaging = FirebaseMessaging();
 @override
 
 void initState() {
   super.initState();
+  reward = AdmobReward(adUnitId: AdManager.rewardId);
+  reward.load();
+  reward = AdmobReward(
+      adUnitId: AdManager.rewardId,
+      listener: (event, args) {
+        if (event == AdmobAdEvent.rewarded) {
+          print("User rewarded.......");
+        }
+      });
+  reward.load();
+
   _messaging.getToken().then((token) {
     print('Token : $token');
   });
@@ -55,7 +67,7 @@ void initState() {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) {
-                  return FirstScreen();
+                  return FirstScreen(rew: reward,);
                 },
               ),
             );
