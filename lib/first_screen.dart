@@ -3,6 +3,7 @@ import 'login_page.dart';
 import 'sign_in.dart';
 import 'package:admob_flutter/admob_flutter.dart';
 import 'ad_manager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FirstScreen extends StatefulWidget {
   AdmobReward rew;
@@ -12,9 +13,14 @@ class FirstScreen extends StatefulWidget {
 }
 class _FirstScreenState extends State<FirstScreen> {
 
+  SharedPreferences logindata;
+  bool newuser;
+
+
   @override
   void initState() {
     super.initState();
+
     widget.rew.show();
 
     // Future.delayed(Duration(seconds: 5), () async {
@@ -24,6 +30,8 @@ class _FirstScreenState extends State<FirstScreen> {
     //   });
       // _showadd();
   }
+
+
 // void show() async {
 //     setState(() {
 //       reward.show();

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'first_screen.dart';
 import 'sign_in.dart';
 import 'first_screen.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:admob_flutter/admob_flutter.dart';
 import 'ad_manager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -13,8 +15,24 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   AdmobReward reward;
   final FirebaseMessaging _messaging = FirebaseMessaging();
-@override
 
+
+
+  SharedPreferences logindata;
+  bool newuser;
+
+
+  void check_if_already_login() async {
+    logindata = await SharedPreferences.getInstance();
+   // newuser = (logindata.getBool('login') ?? true);
+    print(newuser);
+    if (logindata.getString('user') != null) {
+      Navigator.pushReplacement(
+          context, new MaterialPageRoute(builder: (context) => FirstScreen(rew: reward,)));
+    }
+  }
+
+@override
 void initState() {
   super.initState();
   reward = AdmobReward(adUnitId: AdManager.rewardId);
@@ -31,6 +49,7 @@ void initState() {
   _messaging.getToken().then((token) {
     print('Token : $token');
   });
+  check_if_already_login();
 }
   @override
   Widget build(BuildContext context) {
@@ -64,6 +83,7 @@ void initState() {
       onPressed: () {
         signInWithGoogle().then((result) {
           if (result != null) {
+            logindata.setString('user', name);
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) {
